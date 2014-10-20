@@ -1,0 +1,90 @@
+<div class="play">
+  <div class="backdrop-image"></div>
+
+  <div class="movie-detail">
+    <div class="closer"><i class="fa fa-times"></i></div>
+    <div class="poster-cont">
+      <div class="poster-inner">
+        <div class="poster">
+        <img class="big-poster" src="{{bigImage}}" alt="{{title}}" />
+    </div>
+
+        <ul class="movie-config">
+        {{#if quality}}
+          <li class="options quality-cont">
+            <h4>{{quality}}</h4>
+            {{#unless hasSDAndHD}}
+              <div class="quality switch white">
+                <input type="radio" name="switch" id="switch-off"{{#if is720p}} checked {{/if}}>
+                <input type="radio" name="switch" id="switch-on"{{#if is1080p}} checked {{/if}}>
+                <label for="switch-off">720p</label>
+                <label for="switch-on">1080p</label>
+                <span class="toggle"></span>
+              </div>
+            {{else}}
+              <span class="quality-off">{{quality}}</span>
+            {{/unless}}
+          </li>
+        {{/if}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="side-content">
+      <div class="title">
+        <h2>{{title}}</h2>
+
+        <ul class="movie-quick-info">
+          <li>
+            {{year}}
+          </li>
+          <li>
+            {{#if resumetime}}
+              <span class="duration">{{runtime}} - {{resumetime}}m left</span>
+            {{else}}
+              <span class="duration">{{runtime}} {{durationUnit}}</span>
+            {{/if}}
+          </li>
+        </ul>
+
+        <i data-placement="left" data-toggle="tooltip" title="{{health}} health" class="health {{health}} fa fa-flash"></i>
+
+        
+        <div class="rating">
+          <ul class="votes" title="{{voteAverage}} / 10">
+            {{#stars}}
+              {{#repeat full}}
+              <i class="fa fa-star"></i>
+              {{/repeat}}
+              {{#if half}}
+              <i class="fa fa-star-half-o"></i>
+              {{/if}}
+              {{#repeat empty}}
+              <i class="fa fa-star-o"></i>
+              {{/repeat}}
+            {{/stars}}
+          </ul>
+        </div>
+      </div>
+
+      <p>{{synopsis}}</p>
+
+      <div class="subtitles-list">
+      {{#if subtitles}}
+        <h4>{{subtitledIn}}</h4>
+        <ul>
+            <li>
+              {{#each subtitles}}
+                <span class="flag flag-{{@key}}" title="<%= App.Localization.languages[keys[i]].display %>"></span>
+              {{/each}}
+            </li>
+        </ul>
+      {{/if}}
+      </div>
+
+      {{#if torrents}}
+        <a href="#/player/{{imdb}}" class="p_tooltip play-button">{{watchItNow}}</a>
+      {{/if}}
+    </div>
+  </div>
+</div>
